@@ -2400,7 +2400,7 @@ var Forge;
             });
         }]);
     Forge._module.factory('ForgeApiURL', ['$q', '$rootScope', function ($q, $rootScope) {
-            return Kubernetes.kubernetesApiUrl() + "/proxy" + Kubernetes.kubernetesNamespacePath() + "/services/fabric8-forge:80/api/forge";
+            return Kubernetes.kubernetesApiUrl() + Kubernetes.kubernetesNamespacePath() + "/services/fabric8-forge:80/proxy/api/forge";
         }]);
     Forge._module.factory('ForgeProject', ['$q', '$rootScope', function ($q, $rootScope) {
             return new Forge.ForgeProjectService();
