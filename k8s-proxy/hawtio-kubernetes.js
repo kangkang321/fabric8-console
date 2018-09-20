@@ -15,7 +15,7 @@ var Developer;
     Developer.templatePath = Developer.pluginPath + 'html/';
     Developer.log = Logger.get(Developer.pluginName);
     Developer.jenkinsServiceName = "jenkins";
-    Developer.jenkinsServiceNameAndPort = Developer.jenkinsServiceName + ":http";
+    Developer.jenkinsServiceNameAndPort = Developer.jenkinsServiceName + ":80/proxy";
     Developer.jenkinsHttpConfig = {
         headers: {
             Accept: "application/json, text/x-json, text/plain"
