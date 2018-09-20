@@ -2380,10 +2380,10 @@ var Kubernetes;
         var namespace = getNamespace(service);
         if (isV1beta1Or2()) {
             var postfix = "?namespace=" + namespace;
-            return UrlHelpers.join(KubernetesApiURL, kubernetesNamespacePath(), "/services/" + getName(service) + "/proxy" + pathSegment + postfix);
+            return UrlHelpers.join(KubernetesApiURL, kubernetesNamespacePath(), "/services/" + getName(service) + pathSegment + postfix);
         }
         else {
-            return UrlHelpers.join(KubernetesApiURL, "/namespaces/", namespace, "/services/" + getName(service) + "/proxy" + pathSegment);
+            return UrlHelpers.join(KubernetesApiURL, "/namespaces/", namespace, "/services/" + getName(service) + pathSegment);
         }
     }
     Kubernetes.kubernetesProxyUrlForService = kubernetesProxyUrlForService;
@@ -5065,10 +5065,10 @@ var Kubernetes;
                     // TODO temp workaround for k8s on GKE https://github.com/kubernetes/kubernetes/issues/17172
                     entity.$jolokiaUrl = UrlHelpers.join(Kubernetes.masterApiUrl(), "api", Kubernetes.defaultApiVersion, "namespaces", entity.metadata.namespace, "pods", 
                     //"https:" + podId + ":" + foundContainerPort,
-                    podId + ":" + foundContainerPort, "proxy/jolokia/");
+                    podId + ":" + foundContainerPort, "/proxy/jolokia/");
                 }
                 else {
-                    entity.$jolokiaUrl = UrlHelpers.join(Kubernetes.masterApiUrl(), "api", Kubernetes.defaultApiVersion, "namespaces", entity.metadata.namespace, "pods", "https:" + podId + ":" + foundContainerPort, "proxy/jolokia/");
+                    entity.$jolokiaUrl = UrlHelpers.join(Kubernetes.masterApiUrl(), "api", Kubernetes.defaultApiVersion, "namespaces", entity.metadata.namespace, "pods", "https:" + podId + ":" + foundContainerPort, "/proxy/jolokia/");
                 }
             }
         };
@@ -5097,7 +5097,7 @@ var Kubernetes;
             if (proxyService) {
                 var proxyUrl = proxyService.proxyUrl;
                 if (proxyUrl) {
-                    proxyUrl = Core.trimTrailing(proxyUrl, "/") + ":80";
+                    proxyUrl = Core.trimTrailing(proxyUrl, "/") + ":80/proxy";
                     return UrlHelpers.join(proxyUrl, path);
                 }
             }
